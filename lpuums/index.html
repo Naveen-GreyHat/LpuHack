@@ -1,0 +1,808 @@
+
+<!DOCTYPE html>
+<html>
+<head><title>
+	UMS | Lovely Professional University | University Management System
+</title><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta charset="UTF-8" /><meta name="description" content="UMS - University Management System is LPU on-line portico for students and staff to access details of Academic Affairs, Attendance, Examination, Everyday Announcement and Events with one click." /><meta name="keywords" content="UMS, LPU, UMS Login, University Management System, Lovely Professional University" /><meta name="distribution" content="global" /><meta name="copyright" content="LPU is copyright 2005-2023" /><meta name="rating" content="General" /><meta name="language" content="En" />
+    <noscript>
+        <div style="position: fixed; top: 0px; left: 0px; z-index: 3000; height: 100%; width: 100%; background-color: rgba(0,0,0,.6); padding-top: 15%; text-align: center; font-family: Segoe, Segoe UI, DejaVu Sans, Trebuchet MS, Verdana,' sans-serif'; font-size: 20px;">
+            <div style="display: inline-block; background-color: rgba(255,255,255,.7); padding: 45px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px;">
+                <img src="login_images/ums_logo.png" alt="" />
+                <hr style="border: solid 1px #ACACAC">
+                <p style="margin-left: 10px">JavaScript of your browser is not enabled.please enable it first to access UMS</p>
+                <p style="margin-left: 10px">How to enable Javascript : visit this link to step by step help </p>
+                <p style="margin-left: 10px"><a href="http://activatejavascript.org/en/instructions" style="background-color: #337ab7; border-bottom-color: #2e6da4; border-left-color: #2e6da4; border-right-color: #2e6da4; border-top-color: #2e6da4; color: #fff; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; padding: 5px 10px; text-decoration: none">Click Here </a></p>
+            </div>
+        </div>
+    </noscript>
+
+
+
+
+    <link type="text/css" rel="stylesheet" href="assets/login/css/bootstrap.min.css" /><link type="text/css" rel="stylesheet" href="assets/login/css/fonts/font-awesome/css/font-awesome.min.css" /><link type="text/css" rel="stylesheet" href="assets/login/css/fonts/flaticon/font/flaticon.css" /><link type="text/css" rel="stylesheet" href="assets/login/css/bootstrap-datepicker.min.css" /><link type="text/css" rel="stylesheet" href="assets/login/css/sweetalert2.min.css" />
+
+    
+
+    <style>
+        .otp-field {
+            display: flex;
+        }
+
+            .otp-field input {
+                width: 55px;
+                font-size: 22px;
+                padding: 20px;
+                text-align: center;
+                border-radius: 5px;
+                margin: 2px;
+                border: 2px solid #55525c;
+                background: #21232d;
+                font-weight: bold;
+                color: #fff;
+                outline: none;
+                transition: all 0.1s;
+            }
+
+                .otp-field input:focus {
+                    border: 2px solid #a527ff;
+                    box-shadow: 0 0 2px 2px #a527ff6a;
+                }
+
+        .disabled {
+            opacity: 0.5;
+        }
+
+        #MyPopup .mbody {
+            max-width: 100% !important;
+        }
+    </style>
+
+
+    
+    <!-- CSS for transitioning -->
+    <style>
+        .screen {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+            .screen.active {
+                display: block;
+                opacity: 1;
+            }
+    </style>
+
+
+
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="assets/login/img/favicon.ico" type="image/x-icon" /><link href="assets/login/css/css2.css" rel="stylesheet" />
+    <!-- Custom Stylesheet -->
+    <link type="text/css" rel="stylesheet" href="assets/login/css/style.css" />
+    <script src="assets/login/js/jquery-3.6.0.min.js"></script>
+    <script src="assets/login/js/bootstrap-datepicker.min.js"></script>
+    <script src="assets/login/js/sweetalert2.all.min.js"></script>
+    <script src="assets/login/js/popper.min.js" crossorigin="anonymous"></script>
+    <link href="Assets/login/slick/slick.css" rel="stylesheet" /><link href="Assets/login/slick/slick-theme.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+
+        function DisplayAlert(msg) {
+
+            Swal.fire({
+                title: 'UMS',
+                html: msg
+            });
+            $("#MyPopup").hide();
+
+        }
+    </script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-67701680-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    <style>
+        .ums .bg-img1 {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+            background-size: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            flex-direction: column;
+        }
+
+        body {
+            background: #fbf1f1;
+        }
+
+        @media(max-width:1280px) {
+            #Happeningleft {
+                display: none;
+            }
+        }
+
+
+        .lpu-naac .slick-dots {
+            bottom: 0 !important;
+            width: auto !important;
+            top: 10px !important;
+            z-index: 99 !important;
+            height: 32px !important;
+            right: 10px !important;
+        }
+
+            .lpu-naac .slick-dots li {
+                width: 10px !important;
+                height: 10px !important;
+                background: rgba(247, 140, 48, .7) !important;
+                border-radius: 50% !important;
+                border: 1px solid #f78c30b3 !important;
+            }
+
+                .lpu-naac .slick-dots li.slick-active {
+                    background: rgba(239, 56, 0,.5) !important;
+                    border: 1px solid rgba(239, 56, 0,.8) !important;
+                }
+
+                .lpu-naac .slick-dots li button {
+                    display: none !important;
+                }
+
+        .slick-next {
+            display: none !important
+        }
+
+        /*    @media(max-height:1366px) and (min-height:700px){
+        body {
+            display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background:#fbf1f1;
+        }
+  }*/
+    </style>
+<link href="/LpuUms/WebResource.axd?d=hcXDZhXiidgsQUtEo5iT30fH_dTYDJUgFegb7-OjNfbaQmVWpu3cDkxUMKjwNiV26XKE3ffGhHaDWe8_gl82smMyhxAn_O3W9R8ngAK4TWN8JwnOGFVpG-GuPuE707yFoErQccaLd8iNQTYtTb09Ca2vudHGD-czGQaFG1p9q4k1&amp;t=638259930712226080" type="text/css" rel="stylesheet" /></head>
+<body id="top">
+
+
+    <div class="page_loader"></div>
+
+    <!-- Login 11 start -->
+    <div class="ums">
+        <div class="container-fluid">
+            <div class="row">
+
+
+                
+
+                <div id="Happeningleft" class="col-lg-6 col-md-12 p-0">
+
+
+                    <div class="lpu-naac">
+                        <div id="carouselContainer" class="single-item"><div style='background-size:cover;background: url(https://files.lpu.in//umsweb//Events//umseventAssets//27273_2025_3_18_15_23.jpg) #364890'><a href=https://www.youtube.com/watch?v=hJAImJaKx80 target='_Blank'><img class='w-100' src='https://files.lpu.in//umsweb//Events//umseventAssets//27273_2025_3_18_15_23.jpg' alt='Slide '01></a></div></div>
+                    </div>
+
+
+                    
+
+                    <div class="star-field">
+                        <div class="layer"></div>
+                        <div class="layer"></div>
+                        <div class="layer"></div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-6 col-md-12 form-info">
+                    <div class="ums-logo">
+                        <img src="assets/login/img/logos/seal.svg" id="Happninglpuseal" class="lpu" alt="logo" />
+                        <img src="assets/login/img/logos/ums_logo1.svg" class="ums-logo-img" alt="logo">
+                    </div>
+                    <div class="form-section">
+                        <form method="post" action="./" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/LpuUms/WebResource.axd?d=pynGkmcFUV13He1Qd6_TZEHqMqFtYQdik4A_X5BMEG_9yjgDCzYm54hnAn-m7a7pU3iz5cVV3cEXNyZ1q1xXoQ2&amp;t=637109961120000000" type="text/javascript"></script>
+
+
+<script src="/LpuUms/ScriptResource.axd?d=NJmAwtEo3Ipnlaxl6CMhvmZx_1_fm7JieTmbHikZ_IID5YFFXXx4Y5TVWWxnZYePVG01HMyeQrv_eqkyIve_3CJITJGGiJcwwpXUzVpAHH9lZ0cCcmnAdKXPGGv1oGewqtMg14J95AhAczUQ9fESt1coiswLTzmG-pWLLunnpVg1&amp;t=ffffffffe6d5a9ac" type="text/javascript"></script>
+<script src="/LpuUms/ScriptResource.axd?d=eE6V8nDbUVn0gtG6hKNX_OlMFiZiXB5Cm3m8XUXnnx6sPpd99Nu_I6zK9DhbOY_sVyln5nxH7EKoDGO_2HA3gFaVnWuULucy50e6N1nLZoV6YxTwE4EQT8sScRGeRbxF0&amp;t=2009a88" type="text/javascript"></script>
+<script src="/LpuUms/ScriptResource.axd?d=mcAASOSteirJeuV-3by3UTfcvyqMfpHQQvPE8LgNR_uSVyhN4nIp_5hGBpmO2G0Po__GBTZKoERwEgQAA01YK6uQXi_XHAfhjS50dfwG20M1&amp;t=2009a88" type="text/javascript"></script>
+<script src="/LpuUms/ScriptResource.axd?d=jwf4VSQi7LeShc44FJ-gAUUPwefKCK-OY8MikdsGKAGg5B3BRN6c6qAPnC1RKjgK0YFLUZ6SiXwGOIpzFPaKDLFFZpmbNkkeu-xomLSyj3fIqvEGm13gK2HAj0Ymn9cy0&amp;t=2009a88" type="text/javascript"></script>
+<script src="/LpuUms/ScriptResource.axd?d=HEFpVKbnoeQjkjHkFKu3MGO5pl2H_zlQeDqnwQ9s1PK8985t-ElB7fhXw8qaNn8gOOdRq413VVtzbMx-JRj5f-rYsr3XzRJcjNanKEaPl-GADcu2uv9xcN9mPNVaafHy0&amp;t=2009a88" type="text/javascript"></script>
+<script src="/LpuUms/ScriptResource.axd?d=V9BZfzKzDCsxAStwHbjCaP5zPBE7mXP39XFCTH6gQpm5Y3rGjulgVYSvOzQp2WTZYYjuE7ckS9uZyg6XtNWE5se_j8tufTq0KTUEJ0PAS9dSJYecB1fYB8j8zViDy7Ge0&amp;t=2009a88" type="text/javascript"></script>
+<script src="/LpuUms/WebResource.axd?d=JoBkLzP19aTuxbWOhHobYt0XmqYWgXIPrZLY9jH1qqt9vXs3D7zgXaTVWcc9fHm43Ag2UUBiL1vSnJqlyDvOtg2&amp;t=637109961120000000" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="DD46A77E" />
+	<input type="hidden" name="__SCROLLPOSITIONX" id="__SCROLLPOSITIONX" value="0" />
+	<input type="hidden" name="__SCROLLPOSITIONY" id="__SCROLLPOSITIONY" value="0" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="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" />
+</div>
+
+                            
+                            <div id="UpdatePanel1">
+	
+
+                                    <div class="login-inner-form">
+
+                                        <form action="#" method="GET">
+                                            <div class="form-group form-box location">
+                                                <h3>Log in</h3>
+                                                <select name="DropDownList1" id="DropDownList1" class="form-select">
+		<option selected="selected" value="1">HeadOffice</option>
+		<option value="2">Ambedkar Chowk</option>
+		<option value="19">Bhutan</option>
+		<option value="22">Jammu</option>
+		<option value="23">Nepal</option>
+		<option value="34">BanglaDesh</option>
+		<option value="37">Tanzania</option>
+		<option value="38">Kenya</option>
+		<option value="39">Indonesia</option>
+		<option value="40">Sudan</option>
+		<option value="41">TamilnaduCA1</option>
+		<option value="43">Yemen</option>
+		<option value="45">Nigeria</option>
+		<option value="46">Afghanistan</option>
+		<option value="47">JAMMU_CO</option>
+		<option value="48">PUNJAB_CA1</option>
+		<option value="49">PUNJAB_CA2</option>
+		<option value="50">PUNJAB_ASR</option>
+		<option value="52">PUNJAB_LDH</option>
+		<option value="54">HP_CA1</option>
+		<option value="55">HP_CA2</option>
+		<option value="57">HARYANA_CA1</option>
+		<option value="58">HARYANA_CA2</option>
+		<option value="59">HARYANA_AMB</option>
+		<option value="60">DELHI_CO</option>
+		<option value="61">UP_CA1</option>
+		<option value="62">UP_CA2</option>
+		<option value="65">UP_VAR</option>
+		<option value="66">UK_CA1</option>
+		<option value="67">UK_CA2</option>
+		<option value="68">UK_DEH</option>
+		<option value="69">BIHAR_CA1</option>
+		<option value="70">BIHAR_CA2</option>
+		<option value="75">WB_CA1</option>
+		<option value="77">WB_KOL</option>
+		<option value="78">NE_CA1</option>
+		<option value="79">NE_CA2</option>
+		<option value="80">NE_GUH</option>
+		<option value="81">AP_CA1</option>
+		<option value="82">AP_HYD</option>
+		<option value="83">KERALA_CA1</option>
+		<option value="84">TN_CA1</option>
+		<option value="86">MP_CA1</option>
+		<option value="87">MP_CA2</option>
+		<option value="93">GUJARAT_CA1</option>
+		<option value="95">RWANDA</option>
+		<option value="96">BURUNDI</option>
+		<option value="97">NE_CA3</option>
+		<option value="98">NE_CA4</option>
+		<option value="101">AP_CA2</option>
+		<option value="103">UP_CA3</option>
+		<option value="104">Chandigarh</option>
+		<option value="105">USA</option>
+		<option value="108">AP_CA3</option>
+		<option value="110">UP_KAN</option>
+		<option value="111">UP_AGR</option>
+		<option value="183">PUNJAB_BAT</option>
+		<option value="187">PUNJAB_PTK</option>
+		<option value="190">HP_KAN</option>
+		<option value="194">HARYANA_HIS</option>
+		<option value="196">NCR_GUR</option>
+		<option value="197">NCR_GAZ</option>
+		<option value="203">UP_LUC</option>
+		<option value="204">UP_BAR</option>
+		<option value="208">UP_GOR</option>
+		<option value="214">BIHAR_PAT</option>
+		<option value="216">JHARKHAND_CA1</option>
+		<option value="217">JHARKHAND_RAN</option>
+		<option value="224">NE_CA5</option>
+		<option value="225">NE_CA6</option>
+		<option value="229">AP_VIS</option>
+		<option value="233">MAH_CA1</option>
+		<option value="234">MAH_CA2</option>
+		<option value="237">CHATTISGARH_CA1</option>
+		<option value="238">ODISHA_CA1</option>
+		<option value="239">RAJASTHAN_CA1</option>
+		<option value="240">RAJASTHAN_CA2</option>
+		<option value="241">RAJASTHAN_JAI</option>
+		<option value="276">AP_VIJ</option>
+		<option value="277">KARNATAKA_CA1</option>
+		<option value="283">Mongolia</option>
+		<option value="284">Mauritius</option>
+		<option value="286">Kuwait</option>
+		<option value="287">Uganda</option>
+		<option value="288">Thailand</option>
+		<option value="289">Zambia</option>
+		<option value="290">Saudi Arabia</option>
+		<option value="291">Ethopia</option>
+		<option value="292">Srilanka</option>
+		<option value="293">Maldives</option>
+		<option value="294">Ethiopia</option>
+		<option value="295">Syria</option>
+		<option value="296">Iraq</option>
+		<option value="297">Cameroon</option>
+		<option value="298">Egypt</option>
+		<option value="299">Ghana</option>
+		<option value="300">Eritrea</option>
+		<option value="305">Kerala_CA2</option>
+		<option value="384">China</option>
+		<option value="392">Malawi</option>
+		<option value="393">Lesotho</option>
+		<option value="394">Dr Congo</option>
+		<option value="395">South Africa</option>
+		<option value="399">Zimbabwe</option>
+		<option value="401">LATVIA</option>
+		<option value="403">Niger </option>
+		<option value="404">Tajikistan</option>
+		<option value="405">Srinagar_CO</option>
+		<option value="408">NE_MAN</option>
+		<option value="443">Malaysia</option>
+		<option value="483">HP_CA3</option>
+		<option value="491">Kazakhstan</option>
+		<option value="492">Russia</option>
+		<option value="499">Colombia</option>
+		<option value="500">UP_ALL</option>
+		<option value="501">Haryana_CA3</option>
+		<option value="502">Haryana_rohtak</option>
+		<option value="504">Canada</option>
+		<option value="554">PUNJAB_CA3</option>
+		<option value="555">Assam_CA1</option>
+		<option value="556">Assam_CA2</option>
+		<option value="557">Assam_CA3</option>
+		<option value="558">Assam_GUH</option>
+		<option value="600">Haryana_Yamn</option>
+		<option value="603">KARNATAKA_CA2</option>
+		<option value="604">South Sudan</option>
+		<option value="605">Mozambique</option>
+		<option value="692">NCR_CA1</option>
+		<option value="693">NCR_CA2</option>
+		<option value="707">Assam_Jorhat</option>
+		<option value="708">Assam_Tinsukia</option>
+		<option value="709">TLN_CA1</option>
+		<option value="710">HP_CA4</option>
+		<option value="712">The Gambia</option>
+		<option value="713">Congo Brazzaville</option>
+		<option value="714">Guinea</option>
+		<option value="715">TN_CA2</option>
+		<option value="720">Somalia</option>
+		<option value="725">UP_CA4</option>
+		<option value="726">UP_CA5</option>
+		<option value="727">Imphal150617</option>
+		<option value="731">Angola</option>
+		<option value="733">Mali</option>
+		<option value="734">Palestine</option>
+		<option value="735">Jordan</option>
+		<option value="736">OMAN</option>
+		<option value="737">Kota Office 1</option>
+		<option value="738">Kota Office 2</option>
+		<option value="739">Ivory Coast</option>
+		<option value="740">Darjeeling030517</option>
+		<option value="741">Gangtok230517</option>
+		<option value="742">Darjeeling250517</option>
+		<option value="743">Jind100517</option>
+		<option value="744">Thrissur100517</option>
+		<option value="745">Vijaywada130517</option>
+		<option value="746">Pune130517</option>
+		<option value="747">Imphal130517</option>
+		<option value="748">Yamunanagar130617</option>
+		<option value="749">Bangaluru130517</option>
+		<option value="750">Rohtak170517</option>
+		<option value="751">Pallakad170517</option>
+		<option value="752">Kannur180517</option>
+		<option value="753">Hyderabad200517</option>
+		<option value="754">Rajamundry200517</option>
+		<option value="755">Chennai200517</option>
+		<option value="756">Shillong020517</option>
+		<option value="757">Karnal240517</option>
+		<option value="758">Warrangal270517</option>
+		<option value="759">Patna270517</option>
+		<option value="760">Siliguri270517</option>
+		<option value="761">Guwahati300517</option>
+		<option value="762">Shillong300517</option>
+		<option value="763">Kotayam030517</option>
+		<option value="764">Trivandram040517</option>
+		<option value="765">Itanagar050517</option>
+		<option value="766">Hubli060517</option>
+		<option value="767">Kochi080517</option>
+		<option value="769">Agartala090517</option>
+		<option value="770">Jammu100517</option>
+		<option value="771">Kolkatta100617</option>
+		<option value="772">Asansol100617</option>
+		<option value="773">Itanagar010617</option>
+		<option value="774">Srinagar140617</option>
+		<option value="775">Jameshedpur170617</option>
+		<option value="776">Aizwal020617</option>
+		<option value="777">Ranchi240617</option>
+		<option value="778">Patna030617</option>
+		<option value="779">Newdelhi030617</option>
+		<option value="780">Agartala070617</option>
+		<option value="781">Newdelhi080217</option>
+		<option value="782">Gangtok300417</option>
+		<option value="783">Kochi220417</option>
+		<option value="784">Kannur250417</option>
+		<option value="785">Calicut280417</option>
+		<option value="786">Bhubneswar290417</option>
+		<option value="787">Guwahati280417</option>
+		<option value="788">Gorakhpur130517</option>
+		<option value="789">haridwar200517</option>
+		<option value="790">Varanasi280517</option>
+		<option value="791">Orissa_CA2</option>
+		<option value="792">patna31052017</option>
+		<option value="793">Delhi03062017</option>
+		<option value="794">Itanagar050617</option>
+		<option value="795">Burkina Faso</option>
+		<option value="796">Jammu100617</option>
+		<option value="798">Agartala090617</option>
+		<option value="799">Imphal120617</option>
+		<option value="800">Rajasthan_CA3</option>
+		<option value="801">ODHISA_CA2</option>
+		<option value="802">Kohima210617</option>
+		<option value="803">Djibouti</option>
+		<option value="804">UAE (United Arab Emirates)</option>
+		<option value="805">Germany</option>
+		<option value="806">Iran</option>
+		<option value="807">Chad</option>
+		<option value="808">Itanagar_25052018</option>
+		<option value="809">Guwahati_1062018</option>
+		<option value="810">Bhubneshwar_11052018</option>
+		<option value="811">Patna_30052018</option>
+		<option value="812">NewDelhi_2062018</option>
+		<option value="813">Jammu_16062018</option>
+		<option value="814">Thrissur_26052018</option>
+		<option value="815">Shillong_18052018</option>
+		<option value="816">Kannur_24052018</option>
+		<option value="817">Ranchi_19052018</option>
+		<option value="818">Karnal_17052018</option>
+		<option value="819">rohtak_24052018</option>
+		<option value="820">Pb_CA4</option>
+		<option value="821">Pb_CA5</option>
+		<option value="822">Delhi29042018</option>
+		<option value="823">Bhubaneswar</option>
+		<option value="824">Karnal</option>
+		<option value="825">Shillong</option>
+		<option value="826">Ranchi</option>
+		<option value="827">Bengaluru</option>
+		<option value="828">Rohtak</option>
+		<option value="829">Kannur</option>
+		<option value="830">Itanagar</option>
+		<option value="831">Thrissur</option>
+		<option value="832">Patna</option>
+		<option value="833">Guwahati</option>
+		<option value="834">New Delhi</option>
+		<option value="836">Bangluru19052018</option>
+		<option value="837">Imphal 24052018</option>
+		<option value="838">Aizwal26062018</option>
+		<option value="839">Kohima05072018</option>
+		<option value="840">Guwahati09072018</option>
+		<option value="842">Andhra Pradesh_Tirupathi</option>
+		<option value="843">Kerala_Kochi</option>
+		<option value="844">Kerala_Kozhikode</option>
+		<option value="845">Haryana_Hissar</option>
+		<option value="846">Himachal_Hamirpur</option>
+		<option value="847">Nagaland_CA1</option>
+		<option value="848">Sikkim_CO</option>
+		<option value="849">Nagaland_CA2</option>
+		<option value="850">Telagana_HYD</option>
+		<option value="851">Manipu_Imphal</option>
+		<option value="852">Meghalaya_CA1</option>
+		<option value="853">Mizoram_CA1</option>
+		<option value="854">Tripura_CA1</option>
+		<option value="855">Arunachal Pradesh_CA1</option>
+		<option value="856">ODISHA_CA2</option>
+
+	</select>
+
+                                            </div>
+                                            <div class="form-group form-box">
+                                                <input name="txtU" type="text" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;txtU\&#39;,\&#39;\&#39;)&#39;, 0)" onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;" id="txtU" class="form-control" placeholder="User ID" required="" />
+                                                <i class="input-user"></i>
+                                                
+                                            </div>
+                                            <div class="form-group form-box clearfix">
+                                                <input name="TxtpwdAutoId_8767" type="password" id="TxtpwdAutoId_8767" class="form-control" placeholder="Password" required="" />
+                                                <i toggle="#password" class="input-eye input-eye-slash toggle-password"></i>
+                                                
+                                            </div>
+
+                                            
+
+
+                                            
+
+
+
+                                            <div class="checkbox form-group clearfix">
+                                                
+                                                <a href="forgetpassword.aspx"
+                                                    class="link-light float-end forgot-password">Forgot your password?</a>
+                                            </div>
+                                            <div class="form-group mb-0">
+                                                <input type="submit" name="iBtnLogins150203125" value="Login" id="iBtnLogins150203125" class="btn btn-primary btn-lg btn-theme" />
+
+                                            </div>
+
+                                            <div>
+                                                
+                                            </div>
+
+
+                                        </form>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+
+                                    
+                                
+</div>
+
+                            
+    <style type="text/css">
+    .padding
+    {
+    	padding-top:5px;
+    	padding-bottom:5px;
+    }
+    </style>
+
+
+
+
+                            
+                            
+                            <div id="ValidationSummary1" style="display:none;">
+
+</div>
+
+
+
+
+                        
+<script type="text/javascript">
+//<![CDATA[
+var Page_ValidationSummaries =  new Array(document.getElementById("ValidationSummary1"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var ValidationSummary1 = document.all ? document.all["ValidationSummary1"] : document.getElementById("ValidationSummary1");
+ValidationSummary1.showmessagebox = "True";
+ValidationSummary1.showsummary = "False";
+ValidationSummary1.validationGroup = "1";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+theForm.oldSubmit = theForm.submit;
+theForm.submit = WebForm_SaveScrollPositionSubmit;
+
+theForm.oldOnSubmit = theForm.onsubmit;
+theForm.onsubmit = WebForm_SaveScrollPositionOnSubmit;
+WebForm_AutoFocus('txtU');Sys.Application.add_init(function() {
+    $create(Sys.Extended.UI.FilteredTextBoxBehavior, {"filterMode":2,"id":"FilteredTextBoxExtender1","invalidChars":"~!@#$%^\u0026*()_+=-`{}[]|\\:;\"\u0027\u003c\u003e,?/"}, null, null, $get("txtU"));
+});
+//]]>
+</script>
+</form>
+
+                    </div>
+
+                    <div class="mail">
+                        <img src="assets/login/img/mail-icon.svg" alt=" mail-icon" />
+
+                        <a href="http://www.outlook.com/" target="_blank">Student Mail                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <script src="assets/login/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/login/content-zoom-slider.js"></script>
+
+    <script>
+        const inputs = document.querySelectorAll(".otp-field input");
+        inputs.forEach((input, index) => {
+            input.dataset.index = index;
+            input.addEventListener("keyup", handleOtp);
+            input.addEventListener("paste", handleOnPasteOtp);
+        });
+        function handleOtp(e) {
+            /**
+             * <input type="text" 👉 maxlength="1" />
+             * 👉 NOTE: On mobile devices `maxlength` property isn't supported,
+             * So we to write our own logic to make it work. 🙂
+             */
+            const input = e.target;
+            let value = input.value;
+            let isValidInput = value.match(/[0-9a-z]/gi);
+            input.value = "";
+            input.value = isValidInput ? value[0] : "";
+            let fieldIndex = input.dataset.index;
+            if (fieldIndex < inputs.length - 1 && isValidInput) {
+                input.nextElementSibling.focus();
+            }
+            if (e.key === "Backspace" && fieldIndex > 0) {
+                input.previousElementSibling.focus();
+            }
+            if (fieldIndex == inputs.length - 1 && isValidInput) {
+                submit();
+            }
+        }
+        function handleOnPasteOtp(e) {
+            const data = e.clipboardData.getData("text");
+            const value = data.split("");
+            if (value.length === inputs.length) {
+                inputs.forEach((input, index) => (input.value = value[index]));
+                submit();
+            }
+        }
+    </script>
+
+
+    <script>
+        $(function () {
+            if ($(window).width() > 992 && $(window).width() < 1300) {
+                $("#top").contentZoomSlider({
+                    zoom: 90
+                });
+            }
+            $(".toggle-password").on('click', function () {
+                /*     alert("hello");*/
+                $(this).toggleClass("input-eye-slash");
+                var input = $($(this).attr(".toggle-password"));
+                //alert();
+                if ($('#TxtpwdAutoId_8767').attr("type") == "password") {
+                    /*alert("hello done");*/
+                    $('#TxtpwdAutoId_8767').attr("type", "text");
+                } else {
+                    $('#TxtpwdAutoId_8767').attr("type", "password");
+                }
+            });
+
+        });
+
+
+        $(".btnclose").click(function () {
+            $("#txtotp1").value = "";
+            $("#txtotp2").value = "";
+            $("#txtotp3").value = "";
+            $("#txtotp4").value = "";
+            document.getElementById("txtotp4").value = '';
+            document.getElementById("txtotp2").value = '';
+            document.getElementById("txtotp1").value = '';
+            document.getElementById("txtotp3").value = '';
+
+            $("#MyPopup").hide();
+        });
+
+    </script>
+    <script src="Assets/login/slick/slick.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".single-item").not('.slick-initialized').slick({
+                infinite: true,
+                slidesToShow: 1,
+                arrows: true,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 7000,
+                dots: true,
+            });
+
+            if (window.innerHeight <= 1400 && window.innerHeight >= 1024) {
+                $('#Happeningleft').css('display', 'none');
+                $('.form-info').removeClass('col-lg-6');
+            }
+            else {
+                var bodyheight = $('.form-info').innerHeight();
+                $('.lpu-naac').css('height', bodyheight);
+                $('.lpu-naac img').css('height', bodyheight);
+            }
+
+            /*$('body').innerHeight();*/
+        });
+
+
+        function CountDown() {
+            document.getElementById("ReGenrate").style.display = 'none';
+            // Countdown display
+            const countdownDisplay = document.getElementById("countdown");
+            let countdown = 60; // 60 seconds
+
+            countdownDisplay.innerText = `Resend OTP in: ${countdown}s`;
+
+            const interval = setInterval(() => {
+                countdown--;
+                countdownDisplay.innerText = `Resend OTP in: ${countdown}s`;
+
+                if (countdown <= 0) {
+                    clearInterval(interval);
+                    document.getElementById("ReGenrate").style.display = 'inline-block';
+                    countdownDisplay.innerText = ''; // Clear the countdown
+                }
+            }, 1000);
+        }
+
+    </script>
+
+
+    <script>
+        function ResentOTPC() {
+            // Disable the button
+
+           
+            var otperror =  '';
+            if (otperror.toString() === 'error') {
+                alert("Cannot send, Try with your Old OTP");
+            }
+            else {
+
+                document.getElementById('ReGenrate').classList.add('disabled');
+                document.getElementById('ReGenrate').innerText = "Sending...";
+                document.getElementById('ReGenrate').style.pointerEvents = "none";
+
+                // Simulate OTP validation process (you can replace this with actual validation)
+                setTimeout(function () {
+                    // Re-enable the button after 3 seconds (for demo purposes)
+                    document.getElementById('ReGenrate').classList.remove('disabled');
+                    document.getElementById('ReGenrate').innerText = "Resend OTP";
+                    document.getElementById('ReGenrate').style.pointerEvents = "auto";
+                }, 5000);
+            }
+        }
+    </script>
+
+
+    <!-- JavaScript to handle screen transitions -->
+   
+
+</body>
+</html>
